@@ -1,0 +1,79 @@
+Explain all objects.
+subject.test : file subject_test.txt
+subject.train : file subject_train.txt
+subject : subject.test Union subject.train
+
+body.acc.x.test : file body_acc_x_test.txt
+body.acc.x.train : file body_acc_x_train.txt
+body.acc.x : body.acc.x.test Union body.acc.x.train
+
+body.acc.y.test : file body_acc_y_test.txt
+body.acc.y.train : file body_acc_y_train.txt
+body.acc.y : body.acc.y.test Union body.acc.y.train
+
+body.acc.z.test : file body_acc_z_test.txt
+body.acc.z.train : file body_acc_z_train.txt
+body.acc.z : body.acc.z.test Union body.acc.z.train
+
+body.gyro.x.test : file body_gyro_x_test.txt
+body.gyro.x.train : file body_gyro_x_train.txt
+body.gyro.x : body.gyro.x.test Union body.gyro.x.train
+
+body.gyro.y.test : file body_gyro_y_test.txt
+body.gyro.y.train : file body_gyro_y_train.txt
+body.gyro.y : body.gyro.y.test Union body.gyro.y.train
+
+body.gyro.z.test  : file body_gyro_z_test.txt
+body.gyro.z.train  : file body_gyro_z_train.txt
+body.gyro.z : body.gyro.z.test Union body.gyro.z.train
+
+total.acc.x.test  : file total_acc_x_test.txt
+total.acc.x.train  : file total_acc_x_train.txt
+total.acc.x : total.acc.x.test Union total.acc.x.train
+
+total.acc.y.test  : file total_acc_y_test.txt
+total.acc.y.train  : file total_acc_y_train.txt
+total.acc.y : total.acc.y.test Union total.acc.y.train
+
+total.acc.z.test  : file total_acc_z_test.txt
+total.acc.z.train  : file total_acc_z_train.txt
+total.acc.z : total.acc.z.test Union total.acc.z.train
+
+x.test <- read.table("./test/X_test.txt")
+x.train <- read.table("./train/X_train.txt")
+x <- rbind(x.test,x.train)
+write.table(x,"X.txt",row.names = F,col.names = F)
+
+y.test  : file y_test.txt
+y.train  : file y_train.txt
+y : y.test Union y.train
+
+## 2.Extracts only the measurements on the mean and standard deviation for each measurement.
+body.acc.x.mean : mean of body.acc.x
+body.acc.y.mean : mean of body.acc.y
+body.acc.z.mean : mean of body.acc.z
+body.gyro.x.mean : mean of body.gyro.x
+body.gyro.y.mean : mean of body.gyro.y
+body.gyro.z.mean : mean of body.gyro.z
+total.acc.x.mean : mean of total.acc.x
+total.acc.y.mean : mean of total.acc.y
+total.acc.z.mean : mean of total.acc.z
+
+body.acc.x.sd : sd of body.acc.x
+body.acc.y.sd : sd of body.acc.y
+body.acc.z.sd : sd of body.acc.z
+body.gyro.x.sd : sd of body.gyro.x
+body.gyro.y.sd : sd of body.gyro.y
+body.gyro.z.sd : sd of body.gyro.z
+total.acc.x.sd : sd of total.acc.x
+total.acc.y.sd : sd of total.acc.y
+total.acc.z.sd : sd of total.acc.z
+
+## 3.Uses descriptive activity names to name the activities in the data set
+activity.labels  : file activity_labels.txt
+
+## 4.Appropriately labels the data set with descriptive variable names.
+features : file features.txt
+
+## 5.From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+x.mean.group.by.label : mean of X.txt group by (y,subject)
